@@ -1,0 +1,61 @@
+# Output 0
+# Input 1
+
+# == Defining the boxes ==
+# Boxes look like this:
+#        ____
+# |0>---|    |-- OUTPUT
+#       |    | 
+# |x>---|    |-- |x>
+#        ____
+#
+# These are also called our "oracles"
+
+DEFGATE identity-box:
+    1,0,0,0
+    0,1,0,0
+    0,0,0,1
+    0,0,1,0
+
+DEFGATE flip-box:
+    0,1,0,0
+    1,0,0,0
+    0,0,1,0
+    0,0,0,1
+
+DEFGATE constant-zero-box:
+    1,0,0,0
+    0,1,0,0
+    0,0,1,0
+    0,0,0,1
+
+DEFGATE constant-one-box:
+    0,1,0,0
+    1,0,0,0
+    0,0,0,1
+    0,0,1,0
+
+# Now we begin the deutsch algorithm
+
+X 0
+X 1
+
+H 0
+H 1
+
+# ======= ENTER THE BLACK BOX =============
+# Chose your own black a box:
+# flip-box 1 0
+# identity-box 1 0
+# constant-zero-box 1 0
+constant-one-box 1 0
+
+H 0
+H 1
+
+# If the black box is constant-* then the system will be in |11>
+# If the black box is flip/identity then the system will be in |01>
+
+MEASURE 0
+MEASURE 1
+
